@@ -22,8 +22,8 @@ function updateRow(db, value) {
 
 function readRows(db) {
 	// Read some data.
-	db.each("SELECT rowid AS id FROM data", function(err, row) {
-		console.log("row",row.id,row);
+	db.each("SELECT rowid AS id, value, year FROM data", function(err, row) {
+		console.log("row",row.id,row.year,row.value);
 	});
 }
 
@@ -53,13 +53,13 @@ function run(db) {
 			var elements = $("p.Standardbold").each(function () {
 				var value = $(this).text().trim();
 				console.log("value",value);
-				updateRow(db, value);
+				updateRow(db, year, value);
 			});
 			readRows(db);
-			db.close();
 		});
 		year++;
 	}
+	db.close();
 }
 
 initDatabase(run);
