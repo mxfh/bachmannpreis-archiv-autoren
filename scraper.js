@@ -27,7 +27,7 @@ function readRows(db) {
 	});
 }
 
-function fetchPage(url, callback) {
+function fetchPage(url, year, callback) {
 	// Use request to read in pages.
 	request(url, function (error, response, body) {
 		if (error) {
@@ -35,7 +35,7 @@ function fetchPage(url, callback) {
 			return;
 		}
 
-		callback(body);
+		callback(body, year);
 	});
 }
 
@@ -47,7 +47,7 @@ function run(db) {
 		page = ['http://archiv.bachmannpreis.orf.at/25_jahre/',year,'/autoren_',year,'.htm'];
 		url = page.join("");
 		console.log(url);
-		fetchPage(url, function (body, year) {
+		fetchPage(url, year, function (body, year) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
 			var elements = $("p.Standardbold").each(function () {
