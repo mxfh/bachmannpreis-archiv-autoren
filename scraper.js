@@ -41,19 +41,21 @@ function fetchPage(url, callback) {
 
 function run(db) {
 	// Use request to read in pages.
-	fetchPage("https://morph.io", function (body) {
+	let year = 1977;
+	let page = ['http://archiv.bachmannpreis.orf.at/25_jahre/',year,'/autoren_',year,'.htm');
+	while (year < 2001) {
+	fetchPage(page.join(), function (body) {
 		// Use cheerio to find things in the page with css selectors.
 		var $ = cheerio.load(body);
-
-		var elements = $("div.media-body span.p-name").each(function () {
+		var elements = $("p.Standardbold").each(function () {
 			var value = $(this).text().trim();
 			updateRow(db, value);
 		});
-
 		readRows(db);
-
 		db.close();
 	});
+	year++;
+	}
 }
 
 initDatabase(run);
