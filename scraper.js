@@ -44,18 +44,20 @@ function run(db) {
 	var year = 1977;
 	var page = ['http://archiv.bachmannpreis.orf.at/25_jahre/',year,'/autoren_',year,'.htm'];
 	while (year < 2001) {
-	fetchPage(page.join(), function (body) {
-		// Use cheerio to find things in the page with css selectors.
-		var $ = cheerio.load(body);
-		var elements = $("p.Standardbold").each(function () {
-			var value = $(this).text().trim();
-			updateRow(db, value);
+		fetchPage(page.join(), function (body) {
+			// Use cheerio to find things in the page with css selectors.
+			var $ = cheerio.load(body);
+			var elements = $("p.Standardbold").each(function () {
+				console.log("this",$(this));
+				var value = $(this).text().trim();
+				console.log("value",value);
+				updateRow(db, value);
+			});
+			readRows(db);
 		});
-		readRows(db);
-		db.close();
-	});
-	year++;
+		year++;
 	}
+	db.close();
 }
 
 initDatabase(run);
