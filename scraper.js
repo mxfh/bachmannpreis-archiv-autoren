@@ -45,7 +45,7 @@ function run(db) {
 	var page = ['http://archiv.bachmannpreis.orf.at/25_jahre/',year,'/autoren_',year,'.htm'];
 	var url;
 	while (year < 2001) {
-		url = page.join();
+		url = page.join("");
 		console.log(url);
 		fetchPage(url, function (body) {
 			// Use cheerio to find things in the page with css selectors.
