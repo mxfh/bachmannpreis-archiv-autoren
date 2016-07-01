@@ -22,8 +22,8 @@ function updateRow(db, value) {
 
 function readRows(db) {
 	// Read some data.
-	db.each("SELECT rowid AS id, name FROM data", function(err, row) {
-		console.log(row.id + ": " + row.name);
+	db.each("SELECT rowid AS id FROM data", function(err, row) {
+		console.log(row, row.id);
 	});
 }
 
