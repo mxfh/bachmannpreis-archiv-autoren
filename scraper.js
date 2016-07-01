@@ -52,7 +52,7 @@ function run(db) {
 			var $ = cheerio.load(body);
 			var elements = $("p.Standardbold").each(function () {
 				var value = $(this).text().trim();
-				console.log("value",value);
+				console.log(year,value);
 				updateRow(db, year);
 				updateRow(db, value);
 			});
