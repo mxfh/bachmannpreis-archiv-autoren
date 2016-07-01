@@ -53,7 +53,8 @@ function run(db) {
 			var elements = $("p.Standardbold").each(function () {
 				var value = $(this).text().trim();
 				console.log("value",value);
-				updateRow(db, year, value);
+				updateRow(db, year);
+				updateRow(db, value);
 			});
 			readRows(db);
 			db.close();
