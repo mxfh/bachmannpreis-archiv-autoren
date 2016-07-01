@@ -41,8 +41,8 @@ function fetchPage(url, callback) {
 
 function run(db) {
 	// Use request to read in pages.
-	let year = 1977;
-	let page = ['http://archiv.bachmannpreis.orf.at/25_jahre/',year,'/autoren_',year,'.htm');
+	var year = 1977;
+	var page = ['http://archiv.bachmannpreis.orf.at/25_jahre/',year,'/autoren_',year,'.htm');
 	while (year < 2001) {
 	fetchPage(page.join(), function (body) {
 		// Use cheerio to find things in the page with css selectors.
