@@ -56,10 +56,10 @@ function run(db) {
 				updateRow(db, year, value);
 			});
 			readRows(db);
+			db.close();
 		});
 		year++;
 	}
-	db.close();
 }
 
 initDatabase(run);
