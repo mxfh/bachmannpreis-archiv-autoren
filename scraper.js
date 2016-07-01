@@ -42,9 +42,10 @@ function fetchPage(url, callback) {
 function run(db) {
 	// Use request to read in pages.
 	var year = 1977;
-	var page = ['http://archiv.bachmannpreis.orf.at/25_jahre/',year,'/autoren_',year,'.htm'];
+	var page = udefined;
 	var url;
 	while (year < 2001) {
+		page = ['http://archiv.bachmannpreis.orf.at/25_jahre/',year,'/autoren_',year,'.htm'];
 		url = page.join("");
 		console.log(url);
 		fetchPage(url, function (body) {
