@@ -23,7 +23,7 @@ function updateRow(db, value) {
 function readRows(db) {
 	// Read some data.
 	db.each("SELECT rowid AS id, value, year FROM data", function(err, row) {
-		console.log("row",row.id,row.year,row.value);
+		if (row) console.log("row",row.id,row.year,row.value);
 	});
 }
 
