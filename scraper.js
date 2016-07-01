@@ -43,10 +43,14 @@ function run(db) {
 	// Use request to read in pages.
 	var year = 1977;
 	var page = ['http://archiv.bachmannpreis.orf.at/25_jahre/',year,'/autoren_',year,'.htm'];
+	var url;
 	while (year < 2001) {
-		fetchPage(page.join(), function (body) {
+		url = page.join();
+		console.log(url);
+		fetchPage(url, function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
+			console.log("body",$);
 			var elements = $("p.Standardbold").each(function () {
 				console.log("this",$(this));
 				var value = $(this).text().trim();
