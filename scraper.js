@@ -23,7 +23,7 @@ function updateRow(db, value) {
 function readRows(db) {
 	// Read some data.
 	db.each("SELECT rowid AS id FROM data", function(err, row) {
-		console.log(row);
+		console.log("row",row.id,row);
 	});
 }
 
@@ -50,18 +50,16 @@ function run(db) {
 		fetchPage(url, function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
-			console.log("body",$);
 			var elements = $("p.Standardbold").each(function () {
-				console.log("this",$(this));
 				var value = $(this).text().trim();
 				console.log("value",value);
 				updateRow(db, value);
 			});
 			readRows(db);
+			db.close();
 		});
 		year++;
 	}
-	db.close();
 }
 
 initDatabase(run);
